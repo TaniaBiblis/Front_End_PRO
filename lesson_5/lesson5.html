@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Figures</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #area{
+            width: 80%;
+            height: 300px;
+            border: 2px solid #ff0000;
+            position: relative;
+        }
+        .figure{
+            box-shadow: 0 0 10px -2px #ff0000;
+            position: absolute;
+        }
+        .circle{
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+
+<input id="newWidth" type="number" value="50"> <br><br>
+<input id="newHeight" type="number" value="50"> <br><br>
+
+<label> Создать симметричную фигуру
+    <input type="checkbox" id="strictFigure" onclick="disableHeightInput()">
+</label> <br><br>
+<input type="color" id="newColor"> <br><br>
+
+<label>
+    Круг
+    <input id="newCircle" type="radio" name="figure" value="circle" checked>
+</label>
+<label>
+    Квадрат
+    <input id="newSquare" type="radio" name="figure" value="square">
+</label>
+<div id="figureInfo"></div>
+<div id="area"></div>
+
+<script src="lesson5js.js"></script>
+</body>
+</html>
