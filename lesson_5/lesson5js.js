@@ -11,7 +11,6 @@ let setSize = function () {
         width = newWidth.value;
         height = width;
     }
-
 }
 
 let setColor = function () {
@@ -76,7 +75,7 @@ let displayFigInfo = function (target) {
     figureWidth = target.style.width;
     figureHeight = target.style.height;
     figureSize = "Ширина " + figureWidth + ", высота " + figureHeight;
-    figureColor = "Цвет фигуры " +getComputedStyle(target).backgroundColor;
+    figureColor = "Цвет фигуры " + target.style.backgroundColor;
     figureType = target.className;
     if (figureType.indexOf("square") !== -1) {
         figureType = "Квадрат";
@@ -86,22 +85,60 @@ let displayFigInfo = function (target) {
     }
 
     infoDiv.innerHTML = "<p>" + figureType + "</p><p>" + figureSize + "</p><p>" + figureColor + "</p>";
-    updateInput(figureWidth, figureHeight, figureType, getComputedStyle(target).backgroundColor);
+    updateInput(figureWidth, figureHeight, figureType, target.style.backgroundColor);
+
 }
 let updateInput = function (width, height, type, color) {
+    console.log(width);
+    console.log(height);
+    console.log(type);
+    console.log(color);
     let widthInput = document.getElementById("newWidth");
     let heightInput = document.getElementById("newHeight");
-    let typeInput;
-    if (type== "Квадрат") {
-        typeInput = document.getElementById("newSquare");
+    let squareInput = document.getElementById("newSquare");
+    let circleInput = document.getElementById("newCircle");
+    if (type == "Квадрат") {
+        squareInput.checked = true;
+        circleInput.checked = false;
     }
-    else { typeInput = document.getElementById("newCircle");
+    else {
+        squareInput.checked = false;
+        circleInput.checked = true;
     }
     let colorInput = document.getElementById("newColor");
 
+    width = width.substring(0, width.length - 2);
+    height = height.substring(0, height.length - 2);
+    if (width === height) {
+        document.getElementById("strictFigure").checked = true;
+    } else {
+        document.getElementById("strictFigure").checked = false;
+    }
     widthInput.value = width;
     heightInput.value = height;
-    colorInput.value = color;
+    colorInput.value = rgbToHex(color);
+}
+function rgbToHex(color) {
+    color = "" + color;
+    if (!color || color.indexOf("rgb") < 0) {
+        return;
+    }
+
+    if (color.charAt(0) == "#") {
+        return color;
+    }
+
+    var nums = /(.*?)rgb\((\d+),\s*(\d+),\s*(\d+)\)/i.exec(color),
+        r = parseInt(nums[2], 10).toString(16),
+        g = parseInt(nums[3], 10).toString(16),
+        b = parseInt(nums[4], 10).toString(16);
+
+    return "#" + (
+            (r.length == 1 ? "0" + r : r) +
+            (g.length == 1 ? "0" + g : g) +
+            (b.length == 1 ? "0" + b : b)
+        );
 }
 
 area.addEventListener('click', make)
+

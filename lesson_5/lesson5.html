@@ -8,17 +8,19 @@
     <title>Document</title>
 
     <style>
-        #area{
+        #area {
             width: 80%;
             height: 300px;
             border: 2px solid #ff0000;
             position: relative;
         }
-        .figure{
+
+        .figure {
             box-shadow: 0 0 10px -2px #ff0000;
             position: absolute;
         }
-        .circle{
+
+        .circle {
             border-radius: 50%;
         }
     </style>
@@ -42,6 +44,9 @@
     Квадрат
     <input id="newSquare" type="radio" name="figure" value="square">
 </label>
+
+<input type="button" value="Сохранить" onclick="updateFigure">
+
 <div id="figureInfo"></div>
 <div id="area"></div>
 
